@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements MqttAdapter.CallBack {
   static final String TAG = MainActivity.class.getCanonicalName();
@@ -21,7 +23,14 @@ public class MainActivity extends AppCompatActivity implements MqttAdapter.CallB
     (findViewById(R.id.start)).setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         updateView();
-        mqttAdapter.publish("start_capture");
+        JSONObject object = new JSONObject();
+        try {
+          object.put("command", "start_capture");
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+        mqttAdapter.publish(object.toString());
+        //mqttAdapter.publish("start_capture");
       }
     });
     (findViewById(R.id.stop)).setOnClickListener(new View.OnClickListener() {

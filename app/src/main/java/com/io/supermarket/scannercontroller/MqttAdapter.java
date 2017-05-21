@@ -75,7 +75,7 @@ public class MqttAdapter implements MqttCallback {
         public void run() {
           connect();
         }
-      }, 2000);
+      }, 1000);
 
     }
   }
