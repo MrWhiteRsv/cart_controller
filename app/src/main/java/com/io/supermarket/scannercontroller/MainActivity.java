@@ -23,26 +23,19 @@ public class MainActivity extends AppCompatActivity implements MqttAdapter.CallB
     (findViewById(R.id.start)).setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         updateView();
-        JSONObject object = new JSONObject();
-        try {
-          object.put("command", "start_capture");
-        } catch (JSONException e) {
-          e.printStackTrace();
-        }
-        mqttAdapter.publish(object.toString());
-        //mqttAdapter.publish("start_capture");
+        publishCommand("start_capture");
       }
     });
     (findViewById(R.id.stop)).setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         updateView();
-        mqttAdapter.publish("stop_capture");
+        publishCommand("stop_capture");
       }
     });
     (findViewById(R.id.snap)).setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         updateView();
-        mqttAdapter.publish("snap");
+        publishCommand("snap");
       }
     });
     mqttAdapter = new MqttAdapter(this);
@@ -91,6 +84,17 @@ public class MainActivity extends AppCompatActivity implements MqttAdapter.CallB
       }
     });
   }
+
+  private void publishCommand(String command) {
+    JSONObject object = new JSONObject();
+    try {
+      object.put("command", command);
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+    mqttAdapter.publish(object.toString());
+  }
+
 
   private boolean isOnUiThread() {
     return Looper.getMainLooper().getThread() == Thread.currentThread() ;
