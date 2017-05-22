@@ -5,7 +5,9 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -38,6 +40,22 @@ public class MainActivity extends AppCompatActivity implements MqttAdapter.CallB
         publishCommand("snap");
       }
     });
+
+    final EditText editText = (EditText) findViewById(R.id.namePrefix);
+    editText.setFocusableInTouchMode(true);
+    editText.requestFocus();
+
+    editText.setOnKeyListener(new TextView.OnKeyListener() {
+      public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+        if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+          publishCommand("set_name", editText.getText().toString());
+          Log.i(TAG, "Text: " + editText.getText());
+          return true;
+        }
+        return false;
+      }
+    });
+
     mqttAdapter = new MqttAdapter(this);
     mqttAdapter.connect();
     updateView();
@@ -89,6 +107,17 @@ public class MainActivity extends AppCompatActivity implements MqttAdapter.CallB
     JSONObject object = new JSONObject();
     try {
       object.put("command", command);
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+    mqttAdapter.publish(object.toString());
+  }
+
+  private void publishCommand(String command, String var) {
+    JSONObject object = new JSONObject();
+    try {
+      object.put("command", command);
+      object.put("var", var);
     } catch (JSONException e) {
       e.printStackTrace();
     }

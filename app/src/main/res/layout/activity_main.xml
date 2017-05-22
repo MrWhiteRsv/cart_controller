@@ -11,28 +11,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.io.supermarket.scannercontroller.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/image_name_layout"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/is_connected_layout"
+        android:paddingBottom="8dp"
+        android:layout_alignParentEnd="false">
+        <TextView
+            android:text="Image Name:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="pic"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:imeOptions="actionSend"
+            android:id="@+id/namePrefix"/>
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/is_connected_layout"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/images_taken_layout"
-        android:layout_alignParentEnd="false"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="36dp"
-        android:layout_weight="1">
-
+        android:paddingBottom="16dp"
+        android:layout_alignParentEnd="false">
         <TextView
             android:text="Connected:"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.17"/>
-
+            android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/isConnected"
-            android:layout_weight="0.17"/>
+            android:id="@+id/isConnected"/>
     </LinearLayout>
 
     <LinearLayout
@@ -41,23 +59,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttons_layout"
-        android:layout_alignParentEnd="false"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="36dp"
-        android:layout_weight="1">
-
+        android:paddingBottom="16dp"
+        android:layout_alignParentEnd="false">
         <TextView
             android:text="Images Taken:"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.17"/>
-
+            android:layout_height="wrap_content"/>
         <TextView
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/numImagesTaken"
-            android:layout_weight="0.17"/>
+            android:id="@+id/numImagesTaken"/>
     </LinearLayout>
 
     <LinearLayout
@@ -66,23 +78,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp">
-
+        android:layout_centerHorizontal="true">
         <Button
             android:text="Start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/start"
             android:layout_weight="1"/>
-
         <Button
             android:text="Stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/stop"
             android:layout_weight="1"/>
-
         <Button
             android:text="Snap"
             android:layout_width="wrap_content"
@@ -90,5 +98,4 @@
             android:id="@+id/snap"
             android:layout_weight="1"/>
     </LinearLayout>
-
 </RelativeLayout>
